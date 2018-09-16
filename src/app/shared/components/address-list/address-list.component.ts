@@ -8,14 +8,28 @@ import { QtumService } from '../../services/qtum/qtum.service';
 })
 export class AddressListComponent implements OnInit {
   private _addresses: string[];
+  private _selectedAddress: string;
 
   constructor(private qtumService: QtumService) { }
 
   ngOnInit() {
     this._addresses = this.qtumService.getAddresses();
+    this._selectedAddress = this._addresses[0];
+  }
+
+  private selectAddress(address: string): void {
+    this._selectedAddress = address;
+  }
+
+  private isSelectedAddress(address: string): boolean {
+    return address === this.selectedAddress;
   }
 
   get addresses(): string[] {
     return this._addresses;
+  }
+
+  get selectedAddress(): string {
+    return this._selectedAddress;
   }
 }
