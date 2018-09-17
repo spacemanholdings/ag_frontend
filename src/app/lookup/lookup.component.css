@@ -5,3 +5,11 @@
 input {
   width: 40%;
 }
+
+#results {
+  margin-top: 50px;
+}
+
+#results h3 {
+  font-size: 20px;
+}

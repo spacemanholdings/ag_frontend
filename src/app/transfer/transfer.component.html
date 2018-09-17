@@ -4,8 +4,28 @@
       <li *ngFor="let tab of TABS" [class.is-active]="isCurrentTab(tab)" (click)="setCurrentTab(tab)"><a>{{ tab }}</a></li>
     </ul>
   </div>
-  <div *ngIf="currentTab === 'Create a Token'">
-    Create a Token
+  <div *ngIf="currentTab === 'Create a Token'" id="create-token">
+    <div class="field">
+      <label class="label">Organization Address</label>
+      <div class="control">
+        <input class="input" type="text">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Tax Rate</label>
+      <div class="control">
+        <input class="input" type="text">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Exchange Rate</label>
+      <div class="control">
+        <input class="input" type="text">
+      </div>
+    </div>
+    <div class="control">
+      <button class="button is-link">Create Token</button>
+    </div>
   </div>
   <div *ngIf="currentTab === 'Transfer a Token'">
     Transfer a Token

@@ -1,3 +1,59 @@
 <div class="container">
   <input class="input" type="text" placeholder="Search..." (input)="onSearchChange($event.target.value)">
+
+  <div id="results">
+    <div *ngIf="searchType === 'identity'">
+      <div class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+              <p class="title is-4">{{ currentResult.name }}</p>
+              <p class="subtitle is-6">{{ currentResult.email }}</p>
+            </div>
+          </div>
+      
+          <div class="content">
+            <p>Address: {{ currentResult.address }}</p>
+            <p>IPFS Link: <a [href]="currentResult.ipfsLink">{{ currentResult.ipfsLink }}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="searchType === 'circle'">
+      <div class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+              <p class="title is-4">{{ currentResult.name }}</p>
+            </div>
+          </div>
+      
+          <div class="content">
+            <p>Root Circle: {{ currentResult.rootCircle }}</p>
+            <p>Bank Node: {{ currentResult.bankNode }}</p>
+            <p>Leader Address: {{ currentResult.leader }}</p>
+
+            <h3>Members:</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Address</th>
+                  <th>Role</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let member of currentResult.members">
+                  <td>{{ member.address }}</td>
+                  <td>{{ member.role }}</td>
+                  <td>{{ member.purpose }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -10,4 +10,8 @@ export class Identity implements Deserializable {
     Object.assign(this, input);
     return this;
   }
+
+  get ipfsLink(): string {
+    return 'https://ipfs.io/ipfs/' + this.ipfs;
+  }
 }
