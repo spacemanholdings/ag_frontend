@@ -11,11 +11,10 @@ export class LookupComponent {
   constructor() { }
 
   onSearchChange(search: string): void {
+    let hash = namehash.hash(search);
     if (search.endsWith('.identity.arg')) {
-      let hash = namehash.hash(search);
-      console.log(hash);
     } else if (search.endsWith('.bank.arg')) {
-
     }
+    console.log(hash);
   }
 }

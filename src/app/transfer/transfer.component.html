@@ -1,3 +1,16 @@
-<div>
-  transfer
+<div class="container">
+  <div class="tabs">
+    <ul>
+      <li *ngFor="let tab of TABS" [class.is-active]="isCurrentTab(tab)" (click)="setCurrentTab(tab)"><a>{{ tab }}</a></li>
+    </ul>
+  </div>
+  <div *ngIf="currentTab === 'Create a Token'">
+    Create a Token
+  </div>
+  <div *ngIf="currentTab === 'Transfer a Token'">
+    Transfer a Token
+  </div>
+  <div *ngIf="currentTab === 'Withdraw a Token'">
+    Withdraw a Token
+  </div>
 </div>
