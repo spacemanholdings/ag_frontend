@@ -26,7 +26,7 @@ export class RegisterComponent {
       abi: IDENTITY_ABI
     });
     const senderAddress = this.qtumService.selectedAddress.address;
-    contract.deploy([web3.sha3(this.identity.label), IDENTITY_REGISTRAR, senderAddress, this.identity.label,this.identity.email, this.identity.ipfs ], {
+    contract.deploy([web3.sha3(this.identity.label), IDENTITY_REGISTRAR, this.identity.addr, this.identity.label,this.identity.email, this.identity.ipfs ], {
       senderAddress: senderAddress,
       bytecode: IDENTITY_BYTECODE,
       gasLimit: 4000000,
