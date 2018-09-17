@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Identity } from '../shared/models/identity.model';
 import { QtumService } from '../shared/services/qtum/qtum.service';
 import { web3, qtumjs, namehash } from '../shared/globals';
-import { IDENTITY_ABI, IDENTITY_BYTECODE } from '../shared/constants';
+import { IDENTITY_ABI, IDENTITY_BYTECODE, IDENTITY_REGISTRAR } from '../shared/constants';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +26,7 @@ export class RegisterComponent {
       abi: IDENTITY_ABI
     });
     const senderAddress = this.qtumService.selectedAddress.address;
-    contract.deploy([web3.sha3(this.identity.label), namehash.hash(this.identity.label + '.identity.arg')], {
+    contract.deploy([web3.sha3(this.identity.label), IDENTITY_REGISTRAR, senderAddress, this.identity.label,this.identity.email, this.identity.ipfs ], {
       senderAddress: senderAddress,
       bytecode: IDENTITY_BYTECODE,
       gasLimit: 4000000,
