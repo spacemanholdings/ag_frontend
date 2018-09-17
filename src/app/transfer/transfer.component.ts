@@ -12,6 +12,7 @@ export class TransferComponent {
     'Withdraw a Token'
   ];
   private _currentTab = this.TABS[0];
+  private _crossChain: boolean;
 
   constructor() { }
 
@@ -25,6 +26,14 @@ export class TransferComponent {
 
   get currentTab(): string {
     return this._currentTab;
+  }
+
+  get crossChain(): boolean {
+    return this._crossChain;
+  }
+
+  set crossChain(value: boolean) {
+    this._crossChain = value;
   }
 }
 

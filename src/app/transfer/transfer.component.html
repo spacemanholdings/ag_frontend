@@ -12,13 +12,13 @@
       </div>
     </div>
     <div class="field">
-      <label class="label">Tax Rate</label>
+      <label class="label">Tax Rate (%)</label>
       <div class="control">
         <input class="input" type="text">
       </div>
     </div>
     <div class="field">
-      <label class="label">Exchange Rate</label>
+      <label class="label">Exchange Rate (tokens/QTUM)</label>
       <div class="control">
         <input class="input" type="text">
       </div>
@@ -27,10 +27,50 @@
       <button class="button is-link">Create Token</button>
     </div>
   </div>
-  <div *ngIf="currentTab === 'Transfer a Token'">
-    Transfer a Token
+  <div *ngIf="currentTab === 'Transfer a Token'" id="transfer-token">
+    <div class="field">
+      <label class="label">Recipient Address</label>
+      <div class="control">
+        <input class="input" type="text">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Amount to Transfer</label>
+      <div class="control">
+        <input class="input" type="text">
+      </div>
+    </div>
+    <div class="checkbox-container">
+      <label class="checkbox">
+        <input type="checkbox" [(ngModel)]="crossChain">
+        Cross-Chain Transfer
+      </label>
+    </div>
+    <div class="field" *ngIf="crossChain">
+      <label class="label">New Chain Address</label>
+      <div class="control">
+        <input class="input" type="text">
+      </div>
+    </div>
+    <div class="control">
+      <button class="button is-link">Submit Transaction</button>
+    </div>
   </div>
   <div *ngIf="currentTab === 'Withdraw a Token'">
-    Withdraw a Token
+    <div class="field">
+      <label class="label">Wallet Address</label>
+      <div class="control">
+        <input class="input" type="text">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Withdraw Amount</label>
+      <div class="control">
+        <input class="input" type="text">
+      </div>
+    </div>
+    <div class="control">
+      <button class="button is-link">Withdraw Tokens</button>
+    </div>
   </div>
 </div>

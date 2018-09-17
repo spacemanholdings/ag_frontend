@@ -6,6 +6,10 @@
   padding: 15px;
 }
 
-#create-token input {
+input:not([type="checkbox"]) {
   width: 40%;
+}
+
+.checkbox-container {
+  margin-bottom: 20px;
 }
