@@ -11,7 +11,7 @@
   right: 0;
   width: 1px;
   height: 100%;
-  background-color: black;
+  background-color: #dbdbdb;
 }
 
 li {
@@ -20,5 +20,10 @@ li {
 }
 
 li a {
+  color: #8e8d8d;
+}
+
+li a:hover,
+li a.router-link-active {
   color: black;
 }
