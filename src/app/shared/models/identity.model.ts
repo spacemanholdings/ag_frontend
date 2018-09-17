@@ -1,6 +1,7 @@
 import { Deserializable } from './deserializable.model';
 
 export class Identity implements Deserializable {
+  label: string;
   name: string;
   addr: string;
   email: string;

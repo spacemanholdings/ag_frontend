@@ -1,3 +1,37 @@
-<div>
-  register
+<div class="container">
+  <div class="tabs">
+    <ul>
+      <li *ngFor="let tab of TABS" [class.is-active]="isCurrentTab(tab)" (click)="setCurrentTab(tab)"><a>{{ tab }}</a></li>
+    </ul>
+  </div>
+  <div *ngIf="currentTab === 'Create an identity record'" id="create-token">
+    <div class="field">
+      <label class="label">Label</label>
+      <div class="control">
+        <input class="input" type="text" [(ngModel)]="identity.label">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Name</label>
+      <div class="control">
+        <input class="input" type="text" [(ngModel)]="identity.name">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control">
+        <input class="input" type="text" [(ngModel)]="identity.email">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">IFPS Hash</label>
+      <div class="control">
+        <input class="input" type="text" [(ngModel)]="identity.ipfs">
+      </div>
+    </div>
+    <div class="control">
+      <button class="button is-link" (click)="createIdentityRecord()">Create Identity</button>
+    </div>
+  </div>
 </div>
+  

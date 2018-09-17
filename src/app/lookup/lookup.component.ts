@@ -7,6 +7,7 @@ import {
   IDENTITY_ABI, CIRCLE_ABI,
   QTUM_RPC_ENDPOINT
 } from '../shared/constants';
+import { QtumService } from '../shared/services/qtum/qtum.service';
 
 @Component({
   selector: 'app-lookup',
@@ -14,16 +15,14 @@ import {
   styleUrls: ['./lookup.component.css']
 })
 export class LookupComponent implements OnInit {
-  private _rpc: any;
   private _ensContract: any;
   private _searchType: string;
   private _currentResult: any;
 
-  constructor() { }
+  constructor(private qtumService: QtumService) { }
 
   ngOnInit() {
-    this._rpc = new qtumjs.QtumRPC(QTUM_RPC_ENDPOINT);
-    this._ensContract = new qtumjs.Contract(this._rpc, {
+    this._ensContract = new qtumjs.Contract(this.qtumService.rpc, {
       abi: ENS_RESOLVER_ABI,
       address: ENS_RESOLVER_ADDRESS
     });
@@ -76,7 +75,7 @@ export class LookupComponent implements OnInit {
   }
 
   getIdentity(address: string): Promise<Identity> {
-    const contract = new qtumjs.Contract(this._rpc, {
+    const contract = new qtumjs.Contract(this.qtumService.rpc, {
       abi: IDENTITY_ABI,
       address: address
     });
@@ -93,13 +92,13 @@ export class LookupComponent implements OnInit {
   }
 
   getCircle(name: string, address: string): Promise<Circle> {
-    let rootDomain = name.match(/\.?(.*?\.arg)$/gm)[0];
+    const rootDomain = name.match(/\.?(.*?\.arg)$/gm)[0];
     let circle = new Circle().deserialize({
       name: name,
       rootCircle: rootDomain,
       bankNode: 'bank.' + rootDomain
     });
-    const contract = new qtumjs.Contract(this._rpc, {
+    const contract = new qtumjs.Contract(this.qtumService.rpc, {
       abi: CIRCLE_ABI,
       address: address
     });

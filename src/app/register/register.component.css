@@ -1,0 +1,15 @@
+.icon {
+  position: relative;
+}
+
+.tabs {
+  width: 75%;
+}
+
+.container {
+  padding: 15px;
+}
+
+input:not([type="checkbox"]) {
+  width: 40%;
+}

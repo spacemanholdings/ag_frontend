@@ -13,8 +13,10 @@ export class AddressListComponent implements OnInit {
   constructor(private qtumService: QtumService) { }
 
   ngOnInit() {
-    this._addresses = this.qtumService.getAddresses();
-    this._selectedAddress = this._addresses[0];
+    this.qtumService.loadAddresses().then((addresses) => {
+      this._addresses = addresses;
+      this._selectedAddress = this._addresses[0];
+    });
   }
 
   private selectAddress(address: string): void {

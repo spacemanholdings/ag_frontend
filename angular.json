@@ -28,7 +28,8 @@
             ],
             "scripts": [
               "src/ext/ens.bundle.js",
-              "src/ext/qtumjs.bundle.js"
+              "src/ext/qtumjs.bundle.js",
+              "src/ext/web3.min.js"
             ]
           },
           "configurations": {

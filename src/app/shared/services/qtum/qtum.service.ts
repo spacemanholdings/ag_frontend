@@ -1,17 +1,57 @@
 import { Injectable } from '@angular/core';
+import { qtumjs } from '../../globals';
+import { QTUM_RPC_ENDPOINT } from '../../constants';
 
 @Injectable()
 export class QtumService {
-  private DUMMY_ADDRESS = [
-    'QMkpQfMwwJTPXNws1xbwmdhTaAaHQQjHy6',
-    'Qj7saeg1vamVKGrC7KMtELx6BeQ4XE4P6g',
-    'QUZFDZxHMJ2T71VT8tBzBhb6Bq5FhdBxQy',
-    'QPysdTE1TcSmo5vg8rSs83XcqsnZ5xydTn',
-    'QjA67dXp7sUDEhAXQrSYLC5ngCCJCxjz4L',
-    'QNqKeSsHjZfbVxB2jkpDUgGcZvSheWKhCw'
-  ];
+  private _addresses: any[] = [];
+  private _selectedAddress: any;
+  private _rpc: any;
 
-  public getAddresses(): string[] {
-    return this.DUMMY_ADDRESS
+  constructor() {
+    this._rpc = new qtumjs.QtumRPC(QTUM_RPC_ENDPOINT);
+  }
+
+  public loadAddresses(): Promise<any[]> {
+    return new Promise<any[]>((resolve, reject) => {
+      this.rpc.rawCall('listunspent').then((result: any) => {
+        // Return the 10 largest UTXOs by amount
+        const balances: any = {};
+        result.forEach((utxo: any) => {
+          balances[utxo.address] = (balances[utxo.address] || 0) + utxo.amount;
+        });
+        const unsortedBalances: any = [];
+        for (const address in balances) {
+          unsortedBalances[unsortedBalances.length] = {
+            address: address,
+            amount: balances[address]
+          };
+        }
+        this._addresses = unsortedBalances.sort((a: any, b: any) => {
+          return b.amount - a.amount;
+        }).slice(0, 10);
+
+        // Select the largest UTXO automatically
+        this.selectedAddress = this._addresses[0];
+
+        resolve(this._addresses);
+      });
+    });
+  }
+
+  get addresses(): any[] {
+    return this._addresses;
+  }
+
+  get selectedAddress(): any {
+    return this._selectedAddress;
+  }
+
+  set selectedAddress(address: any) {
+    this._selectedAddress = address;
+  }
+
+  get rpc(): any {
+    return this._rpc;
   }
 }

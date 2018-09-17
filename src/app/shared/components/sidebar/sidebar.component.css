@@ -17,10 +17,12 @@
 li {
   text-align: center;
   margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 li a {
   color: #8e8d8d;
+  font-size: 12px;
 }
 
 li a:hover,
